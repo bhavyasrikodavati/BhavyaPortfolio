@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bhavya's Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Ubuntu:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: #000;
+      margin: 0;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(28, 37, 38, 0.2), rgba(45, 62, 80, 0.2));
+      z-index: -1;
+    }
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: #1c2526; }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: linear-gradient(45deg, #e6006d, #00e67a); }
+
+    nav {
+      
+      position: fixed;
+      width: 100%;
+      padding: 20px 0;
+      z-index: 998;
+      transition: all 0.3s ease;
+      font-family: 'Ubuntu', sans-serif;
+      background: transparent;
+    }
+    
+    nav.sticky {
+      background: #000;
+      padding: 10px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    .navbar {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo a {
+      font-weight: 600;
+      font-size: 32px;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    nav.sticky .logo a { color: #fff; }
+    .menu {
+      display: flex;
+      list-style: none;
+      position: relative;
+    }
+    .menu li { margin: 0 15px; }
+    .menu a {
+      font-size: 18px;
+      font-weight: 500;
+      color: #fff;
+      padding: 6px 0;
+      transition: 0.4s;
+    }
+    .menu a:hover { color: #00ff88; }
+    nav.sticky .menu a { color: #fff; }
+    nav.sticky .menu a:hover { color: #ff007a; }
+    .menu-btn, .cancel-btn {
+      position: absolute;
+      top: 20px;
+      nav-down: 140px;
+      right: 30px;
+      font-size: 24px;
+      cursor: pointer;
+      display: none;
+      color: #fff;
+    }
+    .menu-btn { color: #ff007a; }
+    nav.sticky .menu-btn { color: #00ff88; }
+
+    .scroll-button a {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      color: #fff;
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      padding: 10px 15px;
+      font-size: 18px;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      display: none;
+      transition: all 0.3s ease;
+    }
+    .scroll-button a:hover {
+      background: linear-gradient(45deg, #e6006d, #00e67a);
+      transform: scale(1.1);
+    }
+
+    .home-about {
+      background: transparent;
+      color: #fff;
+      padding: 100px 5%;
+      margin-top: 10px;
+    }
+    .home-about-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 50px;
+      animation: fadeIn 1.5s ease-in-out;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .left-image {
+      flex: 1;
+      text-align: center;
+      min-width: 400px;
+      max-width: 400px;
+      opacity: 0;
+    }
+    .left-image.animate {
+      animation: popIn 0.8s ease-in-out forwards;
+    }
+    .left-image div {
+      width: 100%;
+      max-width: 350px;
+      height: 300px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .left-image div:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 255, 136, 0.3);
+    }
+    .right-content {
+      flex: 1;
+      padding-left: 20px;
+      min-width: 300px;
+      max-width: 600px;
+    }
+    .typing-container {
+      font-size: clamp(24px, 5vw, 36px);
+      font-weight: 700;
+      font-family: 'Ubuntu', sans-serif;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid #ff007a;
+      width: 0;
+      animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
+    }
+    .right-content p {
+      color: #d3d3d3;
+      text-align: justify;
+      margin-top: 20px;
+      line-height: 1.6;
+      font-size: clamp(14px, 2.5vw, 16px);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .info-grid div {
+      padding: 15px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border-radius: 10px;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      font-size: clamp(14px, 2.5vw, 16px);
+    }
+    .info-grid div:hover {
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .button button {
+      padding: 12px 24px;
+      font-size: clamp(16px, 2.5vw, 18px);
+      background: linear-gradient(45deg, #333, #555);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+    .button button:hover {
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #ff007a; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .title span {
+      color: #fff;
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      display: inline-block;
+      position: relative;
+    }
+    .title span::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+    }
+
+    .skills {
+      background: transparent;
+      padding: 50px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .skills .boxes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .skills .box {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      animation: popIn 0.8s ease-in-out;
+    }
+    .skills .box:hover {
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .certifications {
+      padding: 50px 5%;
+      background: transparent;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .cert-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .cert-card {
+      width: 280px;
+      padding: 20px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border-radius: 10px;
+      text-align: center;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+    .cert-card:hover {
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .cert-card .heading {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .cert-card p {
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+    .cert-card .view-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: linear-gradient(45deg, #333, #555);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .cert-card .view-btn:hover {
+      background: linear-gradient(45deg, #ff007a, #00ff88);
+      transform: scale(1.05);
+    }
+
+    .internship {
+      padding: 50px 5%;
+      background: transparent;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .internship-container {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    .internship-container::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #ff007a, #00ff88);
+      transform: translateX(-50%);
+      animation: lineGrow 2s ease-in-out forwards;
+    }
+    .internship-card {
+      position: relative;
+      width: 100%;
+      max-width: 300px;
+      padding: 20px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border-radius: 10px;
+      text-align: left;
+      color: #fff;
+      margin: 20px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+    }
+    .internship-card.animate {
+      animation: slideIn 1s ease-in-out forwards;
+    }
+    .internship-card:nth-child(odd) {
+      margin-right: auto;
+    }
+    .internship-card:nth-child(even) {
+      margin-left: auto;
+    }
+    .internship-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      border: 2px solid #ff007a;
+      animation: pulseNode 2s infinite;
+    }
+    .internship-card:nth-child(odd)::before {
+      right: -28px;
+    }
+    .internship-card:nth-child(even)::before {
+      left: -28px;
+    }
+    .internship-card:hover {
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+
+
+      transform: translateY(-5px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .internship-card img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    .internship-card h3 {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .internship-card p {
+      font-size: 14px;
+      margin: 5px 0;
+    }
+    .internship-card .duration {
+      font-size: 14px;
+      font-weight: 500;
+      color: #d3d3d3;
+      margin: 10px 0;
+    }
+    .internship-card .view-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .internship-card .view-btn:hover {
+      background: linear-gradient(45deg, #f5ecf0, #4204af);
+      transform: scale(1.05);
+    }
+    @keyframes lineGrow {
+      0% { height: 0; }
+      100% { height: 100%; }
+    }
+    @keyframes pulseNode {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .project {
+      padding: 50px 5%;
+      background: transparent;
+      text-align: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .project-card {
+      width: 300px;
+      padding: 20px;
+      background: linear-gradient(45deg, #1c2526, #2d3e50);
+      border: 2px solid transparent;
+      border-image:linear-gradient(to right, #ff6a00, #ee0979);
+      border-radius: 12px;
+      text-align: center;
+      color: #fff;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+    }
+    .project-card.animate {
+      animation: popIn 0.8s ease-in-out forwards;
+    }
+    .project-card:hover {
+      background: linear-gradient(to right, #ff6a00, #ee0979);
+
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+      border-image: linear-gradient(45deg, #00ff88, #ff007a) 1;
+    }
+    .project-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 2px solid #ff007a;
+      transition: border-color 0.3s ease;
+    }
+    .project-card:hover img {
+      border-color: #00ff88;
+    }
+    .project-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .project-card p {
+      font-size: 14px;
+      color: #d3d3d3;
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .project-card .view-btn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      background: #000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      display: inline-block;
+    }
+    .project-card .view-btn:hover {
+      background: linear-gradient(45deg, #f5ecf0, #4204af);
+      transform: scale(1.05);
+    }
+
+    
+  </style>
+</head>
+<body>
+  <div class="scroll-button">
+    <a href="#home"><i class="fas fa-angle-double-up"></i></a>
+  </div>
+
+  <nav>
+    <div class="navbar">&nbsp;&nbsp;
+      <div class="logo"><a href="#">Portfolio</a></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <ul class="menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#internship">Internship</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <div class="cancel-btn"><i class="fas fa-times"></i></div>
+      </ul><br><br>
+      <div class="menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+  </nav>
+<br><br><br><br>
+  <section class="home-about" id="home">
+    <div class="home-about-content">
+      <div class="left-image">
+        <div>
+      <img
+          src="https://media-hosting.imagekit.io/1b9c4ef2cc144661/ChatGPT Image May 1, 2025, 07_05_26 PM.png?Expires=1840715707&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=u8CeVOxhfjL8Ps9cdiFaH~Bp3qnHOvhRbA2VHuh0CSqWk4LTpj5U3RvWgbUJgXvocUvXUypHuOPYmEHebIStH8i9GHTe91-JA~dtjWZsKA2zAzLhNwg1TmPx7LF57ZYTHDM84xo6n0I2kQ9BPpQd-R3czU6y-YWD64ywB2YAga1zW4MtPVBnTVhC7VWgEU1qJdLrDc6yNDsOoI~2uw4rSIjGZ3f4Qm9W-Y~HphZdMyfuqcxHV0cOGwPoaJgU494PjfcptAqgQ3Rc~EiKbOM-gcLJcGacUudCnpCauQV-TK4czCZKGMG-VLN0O9EitSdPHYMUr5GeDwvqpQAcu3rF8A__"
+          alt="Bhavya",height="400" width="300"  />
+        </div>
+      </div>
+      <div class="right-content">
+        <div class="typing-container">
+          👐 Hello, I'm Bhavya
+        </div>
+        <p>
+          I am a proficient Python developer with expertise in web technologies, including HTML, CSS, and JavaScript.
+          My strong grasp of Data Structures and Algorithms (DSA) enables me to craft efficient, scalable, and optimized solutions.
+        </p>
+        <div class="info-grid">
+          <div><strong>Name:</strong> Kodavati Bhavya Naga Sri</div>
+          <div><strong>Degree:</strong> B.Tech</div>
+          <div><strong>Experience:</strong> Fresher</div>
+        </div>
+        <div class="button" style="margin-top: 20px;">
+          <a href="https://drive.google.com/file/d/16i9wrYH65AOhmQc7ErXBIZxDLL4Ov4L9/view?usp=sharing" target="_blank">
+            <button>Download Resume</button>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="skills" id="skills">
+    <div class="title"><span>Technical Skills</span></div>
+    <div class="boxes">
+      <div class="box"><div class="topic">Python</div></div>
+      <div class="box"><div class="topic">HTML</div></div>
+      <div class="box"><div class="topic">CSS</div></div>
+      <div class="box"><div class="topic">Git</div></div>
+      <div class="box"><div class="topic">MY SQL</div></div>
+      <div class="box"><div class="topic">Microsoft Excel</div></div>
+      <div class="box"><div class="topic">Microsoft Word</div></div>
+      <div class="box"><div class="topic"> VS Code</div></div>
+      <div class="box"><div class="topic">Git</div></div>
+
+
+
+    </div>
+  </section>
+
+  <section class="certifications" id="certifications">
+    <div class="title"><span>My Certifications</span></div>
+    <div class="cert-container">
+      <div class="cert-card">
+        <p class="heading">Python</p>
+        <p>Issued by: NPTEL</p>
+        <a
+          href="https://archive.nptel.ac.in/content/noc/NOC22/SEM2/Ecertificates/106/noc22-cs122/Course/NPTEL22CS122S5401003410034295.jpg"
+          target="_blank"
+          class="view-btn"
+        >View Certificate</a>
+      </div>
+      <div class="cert-card">
+        <p class="heading">Artificial Intelligence</p>
+        <p>Issued by: Infosys SpringBoard</p>
+        <a
+          href="https://infyspringboard.onwingspan.com/public-assets/infosysheadstart/cert/lex_8840337130015322000_shared/1-c8988e21-e1a7-4ef3-996f-dbc81ec9dc72.pdf"
+          target="_blank"
+          class="view-btn"
+        >View Certificate</a>
+      </div>
+      <div class="cert-card">
+        <p class="heading">Machine Learning</p>
+        <p>Issued by: NPTEL</p>
+        <a
+          href="https://archive.nptel.ac.in/content/noc/NOC23/SEM2/Ecertificates/106/noc23-cs87/Course/NPTEL23CS87S4404004210037443.pdf"
+          target="_blank"
+          class="view-btn"
+        >View Certificate</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="internship" id="internship">
+    <div class="title"><span>Internship Experience</span></div>
+    <div class="internship-container">
+      <div class="internship-card">
+        
+        <h3>Salesforce Developer Intern</h3>
+        <p><strong>Company:</strong> SmartInternz</p>
+        <p class="duration">Aug 2022 – Oct 2022</p>
+        <p>Worked on Salesforce CRM integration, automation scripts, and custom components.</p>
+        <a
+          href="https://bhavyasrikodavati.github.io/salesforce-ce/salesforce%20certicate.png"
+          target="_blank"
+          class="view-btn"
+        >View Credential</a>
+      </div>
+      <div class="internship-card">
+        
+        <h3>Full Stack Developer Intern</h3>
+        <p><strong>Company:</strong> IIDT, Tirupati</p>
+        <p class="duration">May 2024 – Jul 2024</p>
+        <p>Developed a web project using Django, React, and MySQL, implementing REST APIs.</p>
+        <a
+          href="https://drive.google.com/file/d/1mpUYCDXzLsMY8-W4-ddN4EOD9ysJrb62/view?usp=sharing"
+          target="_blank"
+          class="view-btn"
+        >View Credential</a>
+      </div>
+      <div class="internship-card">
+        
+        <h3>Infosys Pragathi Mentee</h3>
+        <p><strong>Company:</strong> Infosys SpringBoard</p>
+        <p class="duration">Dec 2024 – Mar 2025</p>
+        <p>Completed industry-aligned AI/ML training, data preprocessing, and model development.</p>
+        <a
+          href="https://drive.google.com/file/d/1Ztn18qTzJVDEjDnh80sfu3v-qPTvFPnr/view?usp=sharing"
+          target="_blank"
+          class="view-btn"
+        >View Credential</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="project" id="project">
+    <div class="title"><span>Projects</span></div>
+    <div class="project-container">
+      <div class="project-card">
+        <img
+          src="https://tse3.mm.bing.net/th?id=OIP.SZsAWfQ5iiY8hCi_lZIIAQHaHa&pid=Api&P=0&h=180"
+          alt="TicTacToe"
+        />
+        <h3>Tic Tac Toe & Calculator</h3>
+        <p>A web app with a Tic Tac Toe game and a calculator using HTML, CSS, and JavaScript.</p>
+        <a
+          href="https://bhavyasrikodavati.github.io/tic-toe-and-calculator/ticcal.html"
+          target="_blank"
+          class="view-btn"
+        >View</a>
+      </div>
+      <div class="project-card">
+        <img
+          src="https://up.yimg.com/ib/th?id=OIP.f7QbN70OnYVvpN6Nv4wP-gHaHa&pid=Api&rs=1&..."
+          alt="RockPaperScissors"
+        />
+        <h3>Rock Paper Scissors</h3>
+        <p>A web app with a Rock Paper Scissors game using HTML, CSS, and JavaScript.</p>
+        <a
+          href="https://bhavyasrikodavati.github.io/rockpaperscissors/rockpaperscissors.html"
+          target="_blank"
+          class="view-btn"
+        >View</a>
+      </div>
+    </div>
+  </section>
+
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Section</title>
+    <!-- Font Awesome CDN for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <section class="contact" id="contact">
+      <div class="contact-content">
+        <div class="contact-header">
+          <h2>Contact Me</h2>
+          <div class="social-links">
+            <a href="https://github.com/bhavyasrikodavati" target="_blank" class="social-icon">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/bhavya-naga-sri-kodavati-2a276823a/?originalSubdomain=in" target="_blank" class="social-icon">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="bhavyasrikodavati@gmail.com" class="social-icon">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder="E-mail" required />
+          </div>
+          <div class="form-group">
+            <textarea id="message" placeholder="Message" required></textarea>
+          </div>
+          <button onclick="handleSubmit()">Send Message</button>
+        </div>
+      </div>
+    </section>
+  
+    <style>
+      /* Section styling */
+      .contact {
+        padding: 60px 20px;
+        background:  #0a0c0e
+        ; /* Dark background */
+        color: #fff;
+        text-align: center;
+        min-height: 100vh;
+      }
+  
+      .contact-content {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: #121212;
+      }
+  
+      /* Header with heading and social icons */
+      .contact-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        background: #121212;
+        padding: 10px;
+      }
+  
+      .contact-header h2 {
+        font-size: 2.5em;
+        background: linear-gradient(45deg, #ff4081, #4fc3f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: #ff4081; /* Fallback for unsupported browsers */
+      }
+  
+      /* Social links styling */
+      .social-links {
+        display: flex;
+        gap: 25px;
+      }
+  
+      .social-icon i {
+        font-size: 36px;
+        color: #fff; /* Fallback color for visibility */
+        background: linear-gradient(45deg, #ff4081, #4fc3f7);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s;
+        opacity: 0; /* Initial state for animation */
+      }
+  
+      .social-icon:nth-child(1) i {
+        animation: bounceIn 0.5s ease-out 0.2s forwards;
+      }
+  
+      .social-icon:nth-child(2) i {
+        animation: bounceIn 0.5s ease-out 0.4s forwards;
+      }
+  
+      .social-icon:nth-child(3) i {
+        animation: bounceIn 0.5s ease-out 0.6s forwards;
+      }
+  
+      .social-icon i:hover {
+        transform: scale(1.15);
+      }
+  
+      /* Contact form styling */
+      .contact-form {
+        padding: 20px;
+        animation: slideIn 0.7s ease-out forwards;
+        opacity: 0;
+        background: transparent;
+      }
+  
+      .form-group {
+        margin-bottom: 20px;
+      }
+  
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #333;
+        border-radius: 8px;
+        background: #1e1e1e;
+        color: #fff;
+        font-size: 1em;
+        transition: border-color 0.3s;
+      }
+  
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #4fc3f7;
+        outline: none;
+      }
+  
+      .form-group input::placeholder,
+      .form-group textarea::placeholder {
+        color: #aaa;
+      }
+  
+      .contact-form button {
+        padding: 12px 30px;
+        background: linear-gradient(45deg, #ff4081, #4fc3f7);
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+  
+      .contact-form button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+  
+      /* Animations */
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+  
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .contact-header {
+          flex-direction: column;
+          align-items: center;
+        }
+  
+        .contact-header h2 {
+          margin-bottom: 20px;
+        }
+  
+        .social-links {
+          justify-content: center;
+        }
+  
+        .contact-form {
+          width: 100%;
+        }
+      }
+    </style>
+  
+    <script>
+      function handleSubmit() {
+        // Get form input values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+  
+        // Basic validation
+        if (!name || !email || !message) {
+          alert('Please fill in all fields.');
+          return;
+        }
+  
+        // Log form data to console (placeholder for actual submission logic)
+        console.log('Form Submitted:', { name, email, message });
+  
+        // Provide user feedback
+        alert('Thank you for your message! I will get back to you soon.');
+  
+        // Clear form
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      }
+    </script>
+  
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuBtn = document.querySelector('.menu-btn');
+      const cancelBtn = document.querySelector('.cancel-btn');
+      const menu = document.querySelector('.menu');
+      const nav = document.querySelector('nav');
+      const scrollBtn = document.querySelector('.scroll-button a');
+
+      // Menu toggle for mobile
+      if (menuBtn && cancelBtn && menu) {
+        menuBtn.addEventListener('click', () => {
+          menu.classList.add('active');
+        });
+        cancelBtn.addEventListener('click', () => {
+          menu.classList.remove('active');
+        });
+      }
+
+      // Sticky nav and scroll button
+      if (nav && scrollBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 20) {
+            nav.classList.add('sticky');
+            scrollBtn.style.display = 'block';
+          } else {
+            nav.classList.remove('sticky');
+            scrollBtn.style.display = 'none';
+          }
+        });
+      }
+
+      // Intersection Observer for animations
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('animate');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        // Observe internship cards
+        const internshipCards = document.querySelectorAll('.internship-card');
+        internshipCards.forEach((card) => observer.observe(card));
+
+        // Observe project cards
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card) => observer.observe(card));
+
+        // Observe contact illustration
+        const contactIllustration = document.querySelector('.contact-illustration');
+        if (contactIllustration) {
+          observer.observe(contactIllustration);
+        }
+
+        // Observe home illustration
+        const homeIllustration = document.querySelector('.left-image');
+        if (homeIllustration) {
+          observer.observe(homeIllustration);
+        }
+      } else {
+        // Fallback for browsers without IntersectionObserver
+        document.querySelectorAll('.internship-card, .project-card, .contact-illustration, .left-image').forEach((el) => {
+          el.classList.add('animate');
+        });
+      }
+    });
+
+    // Form submission handler
+    function handleSubmit() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && message) {
+        console.log('Form Data:', { name, email, message });
+        alert('Message sent! (Logged to console)');
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      } else {
+        alert('Please fill out all fields.');
+      }
+    }
+  </script>
+</body>
+</html>
